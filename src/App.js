@@ -1,23 +1,25 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import 'bootstrap/dist/css/bootstrap.min.css'
 
-import Navbar from "./components/navbar.component"
-import ExercisesList from "./components/exercises-list.component";
-import EditExercise from "./components/edit-exercise.component";
-import CreateExercise from "./components/create-exercise.component";
-import CreateUser from "./components/create-user.component";
+import ExercisesList from "./components/main";
+import Survey1 from "./components/survey1";
+import Survey2 from "./components/survey2";
+import Survey3 from "./components/survey3";
+import Survey4 from "./components/survey4";
 
 function App() {
   return (
     <Router>
-      <div className="container">
-        <Navbar />
-        <br/>
+      <div>
         <Route path="/" exact component={ExercisesList} />
-        <Route path="/edit/:id" component={EditExercise} />
-        <Route path="/create" component={CreateExercise} />
-        <Route path="/user" component={CreateUser} />
+        <Route path="/survey1" exact component={Survey1} />
+        <Route path="/survey2" exact component={Survey2} />
+        <Route path="/survey3" exact component={Survey3} />
+        <Route path="/survey4" exact component={Survey4} />
+      </div>
+      <div>
+        a-yo a yo <br />
+        i heard you ridin on the same tall, tall tale
       </div>
     </Router>
   );
