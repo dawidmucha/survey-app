@@ -9,20 +9,21 @@ class Survey1 extends React.Component {
 		this.onChange = this.onChange.bind(this)
 	}
 
-	async onSubmit(e) {
+	onSubmit(e) {
 		e.preventDefault()
 
-		await localStorage.setItem('surv1', JSON.stringify(this.state))
-		console.log(localStorage)
+		for(let [key, value] of Object.entries(this.state)) {
+			localStorage.setItem(key, value)
+			console.log(key, value)
+		}
 
 		this.props.history.push('/survey2')
 	}
 
-	async onChange(e) {
-		await this.setState({
+	onChange(e) {
+		this.setState({
 			[e.target.name]: e.target.value
 		})
-		console.log(this.state)
 	}
 
 	render() {
@@ -34,7 +35,7 @@ class Survey1 extends React.Component {
 					<div>
 						<p>Age</p>
 					
-						<input type='radio' name='age' id='age' value='ageUnder' onChange={this.onChange} />
+						<input type='radio' name='age' id='ageUnder' value='ageUnder' onChange={this.onChange} />
 						<label htmlFor='ageUnder'>0-17</label> <br />
 
 						<input type='radio' name='age' id='ageTeen' value='ageTeen' onChange={this.onChange} />

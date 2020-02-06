@@ -9,20 +9,24 @@ class Survey3 extends React.Component {
 		this.onChange = this.onChange.bind(this)
 	}
 
-	async onSubmit(e) {
+	onSubmit(e) {
 		e.preventDefault()
 
-		await localStorage.setItem('surv4', JSON.stringify(this.state))
-		console.log(localStorage)
+		for(let [key, value] of Object.entries(this.state)) {
+			localStorage.setItem(key, value)
+			console.log(key, value)
+		}
+
+		
+		console.log({...localStorage})
 
 		this.props.history.push('/results')
 	}
 
-	async onChange(e) {
-		await this.setState({
+	onChange(e) {
+		this.setState({
 			[e.target.name]: e.target.value
 		})
-		console.log(this.state)
 	}
 	
 	render() {

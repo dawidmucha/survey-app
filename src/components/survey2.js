@@ -9,20 +9,21 @@ class Survey2 extends React.Component {
 		this.onChange = this.onChange.bind(this)
 	}
 
-	async onSubmit(e) {
+	onSubmit(e) {
 		e.preventDefault()
 
-		await localStorage.setItem('surv2', JSON.stringify(this.state))
-		console.log(localStorage)
+		for(let [key, value] of Object.entries(this.state)) {
+			localStorage.setItem(key, value)
+			console.log(key, value)
+		}
 
 		this.props.history.push('/survey3')
 	}
 
-	async onChange(e) {
-		await this.setState({
+	onChange(e) {
+		this.setState({
 			[e.target.name]: e.target.value
 		})
-		console.log(this.state)
 	}
 	
 	render() {

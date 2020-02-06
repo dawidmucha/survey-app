@@ -1,47 +1,41 @@
 import React from 'react'
 
 class Survey3 extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {}
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: ''
+    };
 
-		this.onSubmit = this.onSubmit.bind(this)
-		this.onChange = this.onChange.bind(this)
-	}
+    this.onChange = this.onChange.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
+  }
 
-	async onSubmit(e) {
+  onChange(e) {
+    this.setState({value: e.target.value})
+  }
+
+  async onSubmit(e) {
 		e.preventDefault()
-
-		await localStorage.setItem('surv3', JSON.stringify(this.state))
-		console.log(localStorage)
+		
+		for(let [key, value] of Object.entries(this.state)) {
+			localStorage.setItem(key, value)
+			console.log(key, value)
+		}
 
 		this.props.history.push('/survey4')
-	}
+  }
 
-	async onChange(e) {
-		await this.setState({
-			[e.target.name]: e.target.value
-		})
-		console.log(this.state)
-	}
-
-	componentDidUpdate() {
-		console.log(this.state)
-	}
-	
-	render() {
-		return (
-			<div>
-				<form onSubmit={this.onSubmit}>
-						<label htmlFor='pudding'><h1>What would you do if you won $1000?</h1></label>
-						<p>Write a word or a thesis, I don't care</p>
-						<textarea id='price' name='price' value={this.state.value} onChange={this.handleChange} />
-
-						<button type='submit'>NEXT</button>
-					</form>
-			</div>
-		)
-	}
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.onSubmit}>
+          <textarea value={this.state.value} onChange={this.onChange} cols={40} rows={10} />
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+    );
+  }
 }
 
 export default Survey3
