@@ -6,6 +6,7 @@ import Survey1 from "./components/survey1";
 import Survey2 from "./components/survey2";
 import Survey3 from "./components/survey3";
 import Survey4 from "./components/survey4";
+import Results from "./components/results";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/survey2" exact component={Survey2} />
         <Route path="/survey3" exact component={Survey3} />
         <Route path="/survey4" exact component={Survey4} />
+        <Route path="/results" exact component={Results} />
       </div>
       <div>
         a-yo a yo <br />

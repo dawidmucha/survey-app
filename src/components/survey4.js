@@ -17,7 +17,6 @@ class Survey3 extends React.Component {
 			console.log(key, value)
 		}
 
-		
 		console.log({...localStorage})
 
 		this.props.history.push('/results')
