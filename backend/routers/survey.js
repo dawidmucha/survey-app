@@ -1,5 +1,8 @@
 const router = require('express').Router()
 let Survey = require('../models/survey.model')
+const cors = require('cors')
+
+router.use(cors())
 
 router.route('/survey4').post((req, res) => {
 	const results = req.body.results
@@ -30,6 +33,7 @@ router.route('/survey4').post((req, res) => {
   .then(() => res.json('Survey added!'))
   .catch(err => res.status(400).json('Error: ' + err))
 })
+
 
 router.route('/results').get((req, res) => {
 	Survey.find().then(results => {

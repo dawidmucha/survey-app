@@ -60,7 +60,7 @@ class Survey2 extends React.Component {
 
 						<label htmlFor='english'>American english</label>
 						<input type='radio' name='english' id='engilshAmerican' value='engilshAmerican' onChange={this.onChange} />
-						<input type='radio' name='english' id='anglishBritish' value='anglishBritish' onChange={this.onChange} />
+						<input type='radio' name='english' id='englishBritish' value='englishBritish' onChange={this.onChange} />
 						<label htmlFor='english'>British english</label> <br />
 						
 						<button type='submit'>NEXT</button>
