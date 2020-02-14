@@ -20,8 +20,7 @@ function App() {
         <Route path="/results" exact component={Results} />
       </div>
       <div>
-        a-yo a yo <br />
-        i heard you ridin on the same tall, tall tale
+        a
       </div>
     </Router>
   );

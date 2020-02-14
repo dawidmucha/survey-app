@@ -1,4 +1,5 @@
 import React from 'react'
+const axios = require('axios')
 
 class Survey3 extends React.Component {
 	constructor(props) {
@@ -19,6 +20,10 @@ class Survey3 extends React.Component {
 
 		console.log({...localStorage})
 
+		axios.post('http://localhost:5000/survey4', {
+			...localStorage
+		}).then((res) => console.log(res)).catch(err => console.log(err))
+
 		this.props.history.push('/results')
 	}
 
@@ -29,6 +34,15 @@ class Survey3 extends React.Component {
 	}
 	
 	render() {
+		const input = (question, answer, text) => {	 
+			return (
+				<div>
+					<input type='radio' name={`q${question}`} id={`q${question}${answer}`} value={`q${question}${answer}`} onChange={this.onChange} />
+					<label htmlFor={`q${question}`} id={`q${question}${answer}`}>{text}</label> <br />
+				</div>	
+			)
+		}
+
 		return (
 			<div>
 				<h1>Queen - Don't Stop Me Now trivia</h1>
@@ -38,92 +52,50 @@ class Survey3 extends React.Component {
 					<div>
 						<p>1. What's Freddy floating around?</p>
 							
-						<input type='radio' name='q1' id='q11' value='q11' onChange={this.onChange} />
-						<label htmlFor='q11'>Dopamine</label> <br />
-
-						<input type='radio' name='q1' id='q12' value='q12' onChange={this.onChange} />
-						<label htmlFor='q12'>Ecstasy</label> <br />
-
-						<input type='radio' name='q1' id='q13' value='q13' onChange={this.onChange} />
-						<label htmlFor='q13'>Excitement</label> <br />
-
-						<input type='radio' name='q1' id='q14' value='q14' onChange={this.onChange} />
-						<label htmlFor='q14'>Elecricity</label> <br />
+						{input('1', '1', 'Dopamine')}
+						{input('1', '2', 'Ecstasy')}
+						{input('1', '3', 'Excitement')}
+						{input('1', '4', 'Elecricity')}
 					</div>
 					<div>
 						<p>2. He's a tiger doing what?</p>
-							
-						<input type='radio' name='q2' id='q21' value='q21' onChange={this.onChange} />
-						<label htmlFor='q21'>defying the laws of gravity</label> <br />
-
-						<input type='radio' name='q2' id='q22' value='q22' onChange={this.onChange} />
-						<label htmlFor='q22'>denying all of his cavities</label> <br />
-
-						<input type='radio' name='q2' id='q23' value='q23' onChange={this.onChange} />
-						<label htmlFor='q23'>drinking the juice of anitgravity</label> <br />
-
-						<input type='radio' name='q2' id='q24' value='q24' onChange={this.onChange} />
-						<label htmlFor='q24'>subdueing his creativity</label> <br />
+						
+						{input('2', '1', 'defying the laws of gravity')}
+						{input('2', '2', 'denying all of his cavities')}
+						{input('2', '3', 'drinking the juice of anitgravity')}
+						{input('2', '4', 'subdueing his creativity')}
 					</div>
 					<div>
 						<p>3. He's a racing car passing by like who?</p>
 							
-						<input type='radio' name='q3' id='q31' value='q31' onChange={this.onChange} />
-						<label htmlFor='q11'>Alexander the Great</label> <br />
-
-						<input type='radio' name='q3' id='q32' value='q32' onChange={this.onChange} />
-						<label htmlFor='q32'>Lady Godiva</label> <br />
-
-						<input type='radio' name='q3' id='q33' value='q33' onChange={this.onChange} />
-						<label htmlFor='q33'>Ayrton Senna</label> <br />
-
-						<input type='radio' name='q3' id='q34' value='q34' onChange={this.onChange} />
-						<label htmlFor='q34'>The Pope</label> <br />
+						{input('3', '1', 'Alexander the Great')}
+						{input('3', '2', 'Lady Godiva')}
+						{input('3', '3', 'Ayrton Senna')}
+						{input('3', '4', 'The Pope')}
 					</div>
 					<div>
 						<p>4. He's a rocketship on his way where?</p>
 							
-						<input type='radio' name='q4' id='q41' value='q41' onChange={this.onChange} />
-						<label htmlFor='q41'>to Mars</label> <br />
-
-						<input type='radio' name='q4' id='q42' value='q42' onChange={this.onChange} />
-						<label htmlFor='q42'>to Pluto</label> <br />
-
-						<input type='radio' name='q4' id='q43' value='q43' onChange={this.onChange} />
-						<label htmlFor='q43'>to Uranus</label> <br />
-
-						<input type='radio' name='q4' id='q44' value='q44' onChange={this.onChange} />
-						<label htmlFor='q44'>to Venus</label> <br />
+						{input('4', '1', 'to Mars')}
+						{input('4', '2', 'to Pluto')}
+						{input('4', '3', 'to Uranus')}
+						{input('4', '4', 'to Venus')}
 					</div>
 					<div>
 						<p>5. He's about to explode as what kind of a bomb?</p>
 							
-						<input type='radio' name='q5' id='q51' value='q51' onChange={this.onChange} />
-						<label htmlFor='q51'>hydrogen bomb</label> <br />
-
-						<input type='radio' name='q5' id='q52' value='q52' onChange={this.onChange} />
-						<label htmlFor='q52'>nuclear bomb</label> <br />
-
-						<input type='radio' name='q5' id='q53' value='q53' onChange={this.onChange} />
-						<label htmlFor='q53'>atomic bomb</label> <br />
-
-						<input type='radio' name='q5' id='q54' value='q54' onChange={this.onChange} />
-						<label htmlFor='q54'>neutron bomb</label> <br />
+						{input('4', '1', 'hydrogen bomb')}
+						{input('4', '2', 'nuclear bomb')}
+						{input('4', '3', 'atomic bomb')}
+						{input('4', '4', 'neutron bomb')}
 					</div>
 					<div>
 						<p>6. He's travelling at what speed?</p>
 							
-						<input type='radio' name='q6' id='q61' value='q61' onChange={this.onChange} />
-						<label htmlFor='q61'>the speed of a car</label> <br />
-
-						<input type='radio' name='q6' id='q62' value='q62' onChange={this.onChange} />
-						<label htmlFor='q62'>the speed of light</label> <br />
-
-						<input type='radio' name='q6' id='q63' value='q63' onChange={this.onChange} />
-						<label htmlFor='q63'>the speed of sound</label> <br />
-
-						<input type='radio' name='q6' id='q64' value='q64' onChange={this.onChange} />
-						<label htmlFor='q64'>the speed of sight</label> <br />
+						{input('4', '1', 'the speed of a car')}
+						{input('4', '2', 'the speed of light')}
+						{input('4', '3', 'the speed of sound')}
+						{input('4', '4', 'the speed of sight')}
 					</div>
 					
 					<button type='submit'>SUBMIT</button>
