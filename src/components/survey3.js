@@ -1,4 +1,5 @@
 import React from 'react'
+import {withRouter} from 'react-router-dom'
 
 class Survey3 extends React.Component {
   constructor(props) {
@@ -11,6 +12,10 @@ class Survey3 extends React.Component {
     this.onSubmit = this.onSubmit.bind(this)
   }
 
+	componentDidMount() {
+		this.props.updatePath()
+  }
+  
   onChange(e) {
     this.setState({value: e.target.value})
   }
@@ -20,7 +25,6 @@ class Survey3 extends React.Component {
 		
 		for(let [key, value] of Object.entries(this.state)) {
 			localStorage.setItem(key, value)
-			console.log(key, value)
 		}
 
 		this.props.history.push('/survey4')
@@ -38,4 +42,4 @@ class Survey3 extends React.Component {
   }
 }
 
-export default Survey3
+export default withRouter(Survey3)

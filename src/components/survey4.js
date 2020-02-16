@@ -1,7 +1,8 @@
 import React from 'react'
+import {withRouter} from 'react-router-dom'
 const axios = require('axios')
 
-class Survey3 extends React.Component {
+class Survey4 extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {}
@@ -25,6 +26,10 @@ class Survey3 extends React.Component {
 		}).then((res) => console.log(res)).catch(err => console.log(err))
 
 		this.props.history.push('/results')
+	}
+
+	componentDidMount() {
+		this.props.updatePath()
 	}
 
 	onChange(e) {
@@ -105,4 +110,4 @@ class Survey3 extends React.Component {
 	}
 }
 
-export default Survey3
+export default withRouter(Survey4)

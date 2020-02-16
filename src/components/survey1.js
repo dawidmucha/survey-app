@@ -1,4 +1,5 @@
 import React from 'react'
+import {withRouter} from 'react-router-dom'
 
 class Survey1 extends React.Component {
 	constructor(props) {
@@ -27,8 +28,7 @@ class Survey1 extends React.Component {
 	}
 
 	componentDidMount() {
-		this.localStorage = {}
-		console.log(this.localStorage)
+		this.props.updatePath()
 	}
 
 	render() {
@@ -109,4 +109,4 @@ class Survey1 extends React.Component {
 	}
 }
 
-export default Survey1
+export default withRouter(Survey1)

@@ -78,6 +78,7 @@ export default class Results extends Component {
 	}
 	
 	componentDidMount() {
+		this.props.updatePath()
 		this.setState({fetched: false})
 		axios.get('http://localhost:5000/results').then(response => {	
 		console.log('response', response.data)

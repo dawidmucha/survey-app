@@ -1,4 +1,5 @@
 import React from 'react'
+import {withRouter} from 'react-router-dom'
 
 class Survey2 extends React.Component {
 	constructor(props) {
@@ -7,6 +8,10 @@ class Survey2 extends React.Component {
 
 		this.onSubmit = this.onSubmit.bind(this)
 		this.onChange = this.onChange.bind(this)
+	}
+
+	componentDidMount() {
+		this.props.updatePath()
 	}
 
 	onSubmit(e) {
@@ -70,4 +75,4 @@ class Survey2 extends React.Component {
 	}
 }
 
-export default Survey2
+export default withRouter(Survey2)

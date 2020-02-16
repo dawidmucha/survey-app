@@ -1,0 +1,44 @@
+body {
+	margin: 0;
+	height: 100vh;
+}
+
+.router {
+	display: flex;
+	flex-direction: column;
+}
+
+.routerBody {
+	flex-grow: 1;
+	padding-bottom: 1rem;
+}
+
+.footer {
+	position: fixed;
+	bottom: 0px;
+	background-color: green;
+	height: 1rem;
+	z-index: 1;
+	transition: width 0.5s;
+	transition-timing-function: ease;
+}
+
+.main {
+	width: 0vw;
+}
+
+.survey1 {
+	width: 25vw;
+}
+
+.survey2 {
+	width: 50vw;
+}
+
+.survey3 {
+	width: 75vw;
+}
+
+.survey4 {
+	width: 100vw;
+}
