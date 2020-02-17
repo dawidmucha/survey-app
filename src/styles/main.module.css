@@ -36,6 +36,7 @@
 	font-family: 'Merriweather Sans', sans-serif;
 	font-size: 1.4rem;
 	border-radius: 0.6rem;
+	border-width: 0;
 	background: rgb(24,77,166);
 	background: linear-gradient(0deg, rgba(24,77,166,1) 0%, rgba(90,97,191,1) 77%);
 	box-shadow: 2px 2px 3px 3px #ccc;

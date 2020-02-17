@@ -1,5 +1,6 @@
 import React from 'react'
 import {withRouter} from 'react-router-dom'
+import styles from '../styles/survey.module.css'
 const axios = require('axios')
 
 class Survey4 extends React.Component {

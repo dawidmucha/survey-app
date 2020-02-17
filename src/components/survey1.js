@@ -1,5 +1,6 @@
 import React from 'react'
 import {withRouter} from 'react-router-dom'
+import styles from '../styles/survey.module.css'
 
 class Survey1 extends React.Component {
 	constructor(props) {
@@ -35,19 +36,22 @@ class Survey1 extends React.Component {
 		const input = (name, id, text) => {	 
 			return (
 				<div>
-					<input type='radio' name={`${name}`} id={`${id}`} value={`${id}`} onChange={this.onChange} />
-					<label htmlFor={`q${name}`}>{text}</label> <br />
-				</div>	
+					<label htmlFor={`${id}`} className={styles.element}>
+						<input type='radio' name={`${name}`} id={`${id}`} value={`${id}`} onChange={this.onChange} />
+						<span className={styles.customInput} />
+						<span>{text}</span> <br />
+					</label>	<br />
+				</div>
 			)
 		}
 
 		return (
-			<div>
+			<div className={styles.container}>
 				<h1>Demographics</h1>
 				<p>This part is not directly connected to the rest of the survey. It's only purpouse is to determine the demographic of the survey, which helps us find corelation and allows us to be confident with any conclusions that could be formed based on this survey. We understand you might not want to share some information with us, if so, feel free to select the "Prefer not to answer" option.</p>
-				<form onSubmit={this.onSubmit}>
+				<form className={styles.form} onSubmit={this.onSubmit}>
 					<div>
-						<p>Age</p>
+						<h3 className={styles.category}>Age</h3>
 						{input('age', 'ageUnder', '0-17')}
 						{input('age', 'ageTeen', '18-24')}
 						{input('age', 'ageYadult', '25-34')}
@@ -57,7 +61,7 @@ class Survey1 extends React.Component {
 						{input('age', 'ageUnspecified', 'Prefer not to answer')}
 					</div>	
 					<div>
-						<p>Gender</p>
+						<h3 className={styles.category}>Gender</h3>
 						{input('gender', 'gndrCism', 'Cis Male')}
 						{input('gender', 'gndrCisf', 'Cis Female')}
 						{input('gender', 'gndrTransm', 'Trans male')}
@@ -67,7 +71,7 @@ class Survey1 extends React.Component {
 						{input('gender', 'gndrUnspecified', 'Prefer not to answer')}
 					</div>
 					<div>
-						<p>Ethnicity</p>
+						<h3 className={styles.category}>Ethnicity</h3>
 						{input('ethnicity', 'raceCaucasian', 'Caucasian')}
 						{input('ethnicity', 'raceNegroid', 'Negroid')}
 						{input('ethnicity', 'raceMongoloid', 'Mongoloid')}
@@ -79,7 +83,7 @@ class Survey1 extends React.Component {
 						{input('ethnicity', 'raceUnspecified', 'Prefer not to answer')}
 					</div>
 					<div>
-						<p>Education</p>
+						<h3 className={styles.category}>Education</h3>
 						{input('education', 'eduNone', 'No education')}
 						{input('education', 'eduPrimary', 'Primary Education')}
 						{input('education', 'eduSecondary', 'Secondary Education')}
@@ -90,7 +94,7 @@ class Survey1 extends React.Component {
 						{input('education', 'eduUnspecified', 'Prefer not to answer')}
 					</div>
 					<div>
-						<p>Employment</p>
+						<h3 className={styles.category}>Employment</h3>
 						{input('employment', 'emplFull', 'Full-time(40+ hours a week)')}
 						{input('employment', 'emplPart', 'Part-time(less than 40 hours a week)')}
 						{input('employment', 'emplUnLook', 'Unemployed (looking for job)')}
@@ -102,7 +106,7 @@ class Survey1 extends React.Component {
 						{input('employment', 'emplOther', 'Other')}
 						{input('employment', 'emplUnspecified', 'Prefer not to answer')}
 					</div>
-					<button type='submit'>NEXT</button>
+					<button className={styles.button} type='submit'>NEXT</button>
 				</form>
 			</div>
 		)

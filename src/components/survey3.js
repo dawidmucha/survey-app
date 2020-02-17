@@ -1,5 +1,6 @@
 import React from 'react'
 import {withRouter} from 'react-router-dom'
+import styles from '../styles/survey.module.css'
 
 class Survey3 extends React.Component {
   constructor(props) {
