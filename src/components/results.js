@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import update, { extend } from 'immutability-helper';
 import Chart from "react-google-charts";
+import styles from '../styles/Results.module.css'
 
 const pieOptions = {
   title: "wowsee",
@@ -75,13 +76,14 @@ export default class Results extends Component {
 		}
 
 		this.preparingResults = this.preparingResults.bind(this)
+		this.incrementResults = this.incrementResults.bind(this)
 	}
 	
 	componentDidMount() {
 		this.props.updatePath()
 		this.setState({fetched: false})
 		axios.get('http://localhost:5000/results').then(response => {	
-		console.log('response', response.data)
+			console.log('response', response.data)
 			this.setState({results: [...Object.values(response.data)]})
 			this.setState({fetched: true})
 			this.preparingResults()
@@ -89,293 +91,95 @@ export default class Results extends Component {
 		}).catch((err => console.log(err)))
 	}
 
+	incrementResults(field, position) {
+		this.setState(state => ({
+			[field]: update(state[field], {[position]: {$set: state[field][position]+1}})
+		}))
+	}
+
 	preparingResults() {
 		this.state.results.map(el => {
 			//survey1
 			switch(el.age) {
-				case 'ageUnder': 
-					this.setState(state => ({
-						age: update(state.age, {0: {$set: state.age[0]+1}})
-					}))
-					break;
-					case 'ageTeen': 
-					this.setState(state => ({
-						age: update(state.age, {1: {$set: state.age[1]+1}})
-					}))
-					break;
-					case 'ageYadult': 
-					this.setState(state => ({
-						age: update(state.age, {2: {$set: state.age[2]+1}})
-					}))
-					break;
-					case 'ageAdult': 
-					this.setState(state => ({
-						age: update(state.age, {3: {$set: state.age[3]+1}})
-					}))
-					break;
-					case 'ageSadult': 
-					this.setState(state => ({
-						age: update(state.age, {4: {$set: state.age[4]+1}})
-					}))
-					break;
-					case 'ageSenior': 
-					this.setState(state => ({
-						age: update(state.age, {5: {$set: state.age[5]+1}})
-					}))
-					break;
-					case 'ageUndefined': 
-					this.setState(state => ({
-						age: update(state.age, {6: {$set: state.age[6]+1}})
-					}))
-					break;
-					default: console.log('error')
+				case 'ageUnder': this.incrementResults('age', 0); break;
+				case 'ageTeen': this.incrementResults('age', 1); break;
+				case 'ageYadult': this.incrementResults('age', 2); break;
+				case 'ageAdult': this.incrementResults('age', 3); break;
+				case 'ageSadult': this.incrementResults('age', 4); break;
+				case 'ageSenior': this.incrementResults('age', 5); break;
+				case 'ageUndefined': this.incrementResults('age', 6); break;
+				default: console.log('error')
 			}
 	
 			switch(el.gender) {
-				case 'gndrCism': 
-					this.setState(state => ({
-						gender: update(state.gender, {0: {$set: state.gender[0]+1}})
-					}))
-					break;
-					case 'gndrCisf': 
-					this.setState(state => ({
-						gender: update(state.gender, {1: {$set: state.gender[1]+1}})
-					}))
-					break;
-					case 'gndrTransm': 
-					this.setState(state => ({
-						gender: update(state.gender, {2: {$set: state.gender[2]+1}})
-					}))
-					break;
-					case 'gndrTransf': 
-					this.setState(state => ({
-						gender: update(state.gender, {3: {$set: state.gender[3]+1}})
-					}))
-					break;
-					case 'gndrNb': 
-					this.setState(state => ({
-						gender: update(state.gender, {4: {$set: state.gender[4]+1}})
-					}))
-					break;
-					case 'gndrOther': 
-					this.setState(state => ({
-						gender: update(state.gender, {5: {$set: state.gender[5]+1}})
-					}))
-					break;
-					case 'gndrUndefined': 
-					this.setState(state => ({
-						gender: update(state.gender, {6: {$set: state.gender[6]+1}})
-					}))
-					break;
-					default: console.log('error')
+				case 'gndrCism': this.incrementResults('gender', 0); break;
+				case 'gndrCisf': this.incrementResults('gender', 1); break;
+				case 'gndrTransm': this.incrementResults('gender', 2); break;
+				case 'gndrTransf': this.incrementResults('gender', 3); break;
+				case 'gndrNb': this.incrementResults('gender', 4); break;
+				case 'gndrOther': this.incrementResults('gender', 5); break;
+				case 'gndrUndefined': this.incrementResults('gender', 6); break;
+				default: console.log('error')
 			}
 
 			switch(el.ethnicity) {
-				case 'raceCaucasian':
-					this.setState(state => ({
-						ethnicity: update(state.ethnicity, {0: {$set: state.ethnicity[0]+1}})
-					}))
-					break;
-				case 'raceNegroid':
-					this.setState(state => ({
-						ethnicity: update(state.ethnicity, {1: {$set: state.ethnicity[1]+1}})
-					}))
-					break;
-				case 'raceMongoloid':
-					this.setState(state => ({
-						ethnicity: update(state.ethnicity, {2: {$set: state.ethnicity[2]+1}})
-					}))
-					break;
-				case 'raceAsian':
-					this.setState(state => ({
-						ethnicity: update(state.ethnicity, {3: {$set: state.ethnicity[3]+1}})
-					}))
-					break;
-				case 'raceFilipino':
-					this.setState(state => ({
-						ethnicity: update(state.ethnicity, {4: {$set: state.ethnicity[4]+1}})
-					}))
-					break;
-				case 'raceNative':
-					this.setState(state => ({
-						ethnicity: update(state.ethnicity, {5: {$set: state.ethnicity[5]+1}})
-					}))
-					break;
-				case 'raceLatinx':
-					this.setState(state => ({
-						ethnicity: update(state.ethnicity, {6: {$set: state.ethnicity[6]+1}})
-					}))
-					break;
-				case 'raceOther':
-					this.setState(state => ({
-						ethnicity: update(state.ethnicity, {7: {$set: state.ethnicity[7]+1}})
-					}))
-					break;
-				case 'raceUnspecified':
-					this.setState(state => ({
-						ethnicity: update(state.ethnicity, {8: {$set: state.ethnicity[8]+1}})
-					}))
-					break;
-					default: console.log('error')
+				case 'raceCaucasian': this.incrementResults('ethnicity', 0); break;
+				case 'raceNegroid': this.incrementResults('ethnicity', 1); break;
+				case 'raceMongoloid': this.incrementResults('ethnicity', 2); break;
+				case 'raceAsian': this.incrementResults('ethnicity', 3); break;
+				case 'raceFilipino': this.incrementResults('ethnicity', 4); break;
+				case 'raceNative': this.incrementResults('ethnicity', 5); break;
+				case 'raceLatinx': this.incrementResults('ethnicity', 6); break;
+				case 'raceOther': this.incrementResults('ethnicity', 7); break;
+				case 'raceUnspecified': this.incrementResults('ethnicity', 8); break;
+				default: console.log('error')
 			}
 
 			switch(el.education) {
-				case 'eduNone':
-					this.setState(state => ({
-						education: update(state.education, {0: {$set: state.education[0]+1}})
-					}))
-					break;
-				case 'eduPrimary':
-					this.setState(state => ({
-						education: update(state.education, {1: {$set: state.education[1]+1}})
-					}))
-					break;
-				case 'eduSecondary':
-					this.setState(state => ({
-						education: update(state.education, {2: {$set: state.education[2]+1}})
-					}))
-					break;
-				case 'eduBachelors':
-					this.setState(state => ({
-						education: update(state.education, {3: {$set: state.education[3]+1}})
-					}))
-					break;
-				case 'eduMasters':
-					this.setState(state => ({
-						education: update(state.education, {4: {$set: state.education[4]+1}})
-					}))
-					break;
-				case 'eduDoctorate':
-					this.setState(state => ({
-						education: update(state.education, {5: {$set: state.education[5]+1}})
-					}))
-					break;
-				case 'eduOther':
-					this.setState(state => ({
-						education: update(state.education, {6: {$set: state.education[6]+1}})
-					}))
-					break;
-				case 'eduUnspecified':
-					this.setState(state => ({
-						education: update(state.education, {7: {$set: state.education[7]+1}})
-					}))
-					break;
-					default: console.log('error')
+				case 'eduNone': this.incrementResults('education', 0); break;
+				case 'eduPrimary': this.incrementResults('education', 1); break;
+				case 'eduSecondary': this.incrementResults('education', 2); break;
+				case 'eduBachelors': this.incrementResults('education', 3); break;
+				case 'eduMasters': this.incrementResults('education', 4); break;
+				case 'eduDoctorate': this.incrementResults('education', 5); break;
+				case 'eduOther': this.incrementResults('education', 6); break;
+				case 'eduUnspecified': this.incrementResults('education', 7); break;
+				default: console.log('error')
 			}
 
 			switch(el.employment) {
-				case 'emplFull':
-					this.setState(state => ({
-						employment: update(state.employment, {0: {$set: state.employment[0]+1}})
-					}))
-					break;
-				case 'emplPart':
-					this.setState(state => ({
-						employment: update(state.employment, {1: {$set: state.employment[1]+1}})
-					}))
-					break;
-				case 'emplUnLook':
-					this.setState(state => ({
-						employment: update(state.employment, {2: {$set: state.employment[2]+1}})
-					}))
-					break;
-				case 'emplUn':
-					this.setState(state => ({
-						employment: update(state.employment, {3: {$set: state.employment[3]+1}})
-					}))
-					break;
-				case 'emplStudent':
-					this.setState(state => ({
-						employment: update(state.employment, {4: {$set: state.employment[4]+1}})
-					}))
-					break;
-				case 'emplRetired':
-					this.setState(state => ({
-						employment: update(state.employment, {5: {$set: state.employment[5]+1}})
-					}))
-					break;
-				case 'emplSelf':
-					this.setState(state => ({
-						employment: update(state.employment, {6: {$set: state.employment[6]+1}})
-					}))
-					break;
-				case 'emplUnable':
-					this.setState(state => ({
-						employment: update(state.employment, {7: {$set: state.employment[7]+1}})
-					}))
-					break;
-				case 'emplOther':
-					this.setState(state => ({
-						employment: update(state.employment, {8: {$set: state.employment[8]+1}})
-					}))
-					break;
-				case 'emplUnspecified':
-					this.setState(state => ({
-						employment: update(state.employment, {9: {$set: state.employment[9]+1}})
-					}))
-					break;
-					default: console.log('error')
-			}
-			//survey2
-			if(el.pudding === 'puddingChocolate') {
-				this.setState(state => ({
-					pudding: update(state.pudding, {0: {$set: state.pudding[0]+1}})
-				}))
-			} else if(el.pudding === 'puddingVanilla') {
-				this.setState(state => ({
-					pudding: update(state.pudding, {1: {$set: state.pudding[1]+1}})
-				}))
-			}
-			
-			if(el.chocolate === 'chocolateDark') {
-				this.setState(state => ({
-					chocolate: update(state.chocolate, {0: {$set: state.chocolate[0]+1}})
-				}))
-			} else if(el.chocolate === 'chocolateMilk') {
-				this.setState(state => ({
-					chocolate: update(state.chocolate, {1: {$set: state.chocolate[1]+1}})
-				}))
-			}
-			
-			if(el.staple === 'stapleRice') {
-				this.setState(state => ({
-					staple: update(state.pudding, {0: {$set: state.staple[0]+1}})
-				}))
-			} else if(el.staple === 'staplePotatoes') {
-				this.setState(state => ({
-					staple: update(state.staple, {1: {$set: state.staple[1]+1}})
-				}))
-			}
-			
-			if(el.hemisphere === 'hemisphereN') {
-				this.setState(state => ({
-					hemisphere: update(state.hemisphere, {0: {$set: state.hemisphere[0]+1}})
-				}))
-			} else if(el.hemisphere === 'hemisphereS') {
-				this.setState(state => ({
-					hemisphere: update(state.hemisphere, {1: {$set: state.hemisphere[1]+1}})
-				}))
-			}
-			
-			if(el.framework === 'frameworkReact') {
-				this.setState(state => ({
-					framework: update(state.framework, {0: {$set: state.framework[0]+1}})
-				}))
-			} else if(el.framework === 'frameworkAngular') {
-				this.setState(state => ({
-					framework: update(state.framework, {1: {$set: state.framework[1]+1}})
-				}))
+				case 'emplFull': this.incrementResults('employment', 0); break;
+				case 'emplPart': this.incrementResults('employment', 1); break;
+				case 'emplUnLook': this.incrementResults('employment', 2); break;
+				case 'emplUn': this.incrementResults('employment', 3); break;
+				case 'emplStudent': this.incrementResults('employment', 4); break;
+				case 'emplRetired': this.incrementResults('employment', 5); break;
+				case 'emplSelf': this.incrementResults('employment', 6); break;
+				case 'emplUnable': this.incrementResults('employment', 7); break;
+				case 'emplOther': this.incrementResults('employment', 8); break;
+				case 'emplUnspecified': this.incrementResults('employment', 9); break;
+				default: console.log('error')
 			}
 
-			if(el.english === 'engilshAmerican') {
-				this.setState(state => ({
-					english: update(state.english, {0: {$set: state.english[0]+1}})
-				}))
-			} else if(el.english === 'englishBritish') {
-				this.setState(state => ({
-					english: update(state.english, {1: {$set: state.english[1]+1}})
-				}))
-			}
+			//survey2
+			if(el.pudding === 'puddingChocolate') this.incrementResults('pudding', 0)
+			else if(el.pudding === 'puddingVanilla') this.incrementResults('pudding', 1)
+			
+			if(el.chocolate === 'chocolateDark') this.incrementResults('chocolate', 0)
+			else if(el.chocolate === 'chocolateMilk') this.incrementResults('chocolate', 1)
+			
+			if(el.staple === 'stapleRice') this.incrementResults('staple', 0)
+			else if(el.staple === 'staplePotatoes') this.incrementResults('staple', 1)
+			
+			if(el.hemisphere === 'hemisphereN') this.incrementResults('hemisphere', 0)
+			else if(el.hemisphere === 'hemisphereS') this.incrementResults('hemisphere', 1)
+			
+			if(el.framework === 'frameworkReact') this.incrementResults('framework', 0)
+			else if(el.framework === 'frameworkAngular') this.incrementResults('framework', 1)
+
+			if(el.english === 'engilshAmerican') this.incrementResults('english', 0)
+			else if(el.english === 'englishBritish') this.incrementResults('english', 1)
+
 			//survey3
 			if(!this.state.shortest || (this.state.shortest.length > el.value.length)) {
 				this.setState(state => ({
@@ -388,149 +192,54 @@ export default class Results extends Component {
 					longest: el.value
 				}))
 			}
+
 			//survey4
 			switch(el.q1) {
-				case 'q11':
-					this.setState(state => ({
-						q1: update(state.q1, {0: {$set: state.q1[0]+1}})
-					}))
-					break;
-				case 'q12':
-					this.setState(state => ({
-						q1: update(state.q1, {1: {$set: state.q1[1]+1}})
-					}))
-					break;
-				case 'q13':
-					this.setState(state => ({
-						q1: update(state.q1, {2: {$set: state.q1[2]+1}})
-					}))
-					break;
-				case 'q14':
-					this.setState(state => ({
-						q1: update(state.q1, {3: {$set: state.q1[3]+1}})
-					}))
-					break;
-					default: console.log('error')
+				case 'q11': this.incrementResults('q1', 0); break;
+				case 'q12': this.incrementResults('q1', 1); break;
+				case 'q13': this.incrementResults('q1', 2); break;
+				case 'q14': this.incrementResults('q1', 3); break;
+				default: console.log('error')
 			}
 
 			switch(el.q2) {
-				case 'q21':
-					this.setState(state => ({
-						q2: update(state.q2, {0: {$set: state.q2[0]+1}})
-					}))
-					break;
-				case 'q22':
-					this.setState(state => ({
-						q2: update(state.q2, {1: {$set: state.q2[1]+1}})
-					}))
-					break;
-				case 'q23':
-					this.setState(state => ({
-						q2: update(state.q2, {2: {$set: state.q2[2]+1}})
-					}))
-					break;
-				case 'q24':
-					this.setState(state => ({
-						q2: update(state.q2, {3: {$set: state.q2[3]+1}})
-					}))
-					break;
-					default: console.log('error')
+				case 'q21': this.incrementResults('q2', 0); break;
+				case 'q22': this.incrementResults('q2', 1); break;
+				case 'q23': this.incrementResults('q2', 2); break;
+				case 'q24': this.incrementResults('q2', 3); break;
+				default: console.log('error')
 			}
 
 			switch(el.q3) {
-				case 'q31':
-					this.setState(state => ({
-						q3: update(state.q3, {0: {$set: state.q3[0]+1}})
-					}))
-					break;
-				case 'q32':
-					this.setState(state => ({
-						q3: update(state.q3, {1: {$set: state.q3[1]+1}})
-					}))
-					break;
-				case 'q33':
-					this.setState(state => ({
-						q3: update(state.q3, {2: {$set: state.q3[2]+1}})
-					}))
-					break;
-				case 'q34':
-					this.setState(state => ({
-						q3: update(state.q3, {3: {$set: state.q3[3]+1}})
-					}))
-					break;
-					default: console.log('error')
+				case 'q31': this.incrementResults('q3', 0); break;
+				case 'q32': this.incrementResults('q3', 1); break;
+				case 'q33': this.incrementResults('q3', 2); break;
+				case 'q34': this.incrementResults('q3', 3); break;
+				default: console.log('error')
 			}
 
 			switch(el.q4) {
-				case 'q41':
-					this.setState(state => ({
-						q4: update(state.q4, {0: {$set: state.q4[0]+1}})
-					}))
-					break;
-				case 'q42':
-					this.setState(state => ({
-						q4: update(state.q4, {1: {$set: state.q4[1]+1}})
-					}))
-					break;
-				case 'q43':
-					this.setState(state => ({
-						q4: update(state.q4, {2: {$set: state.q4[2]+1}})
-					}))
-					break;
-				case 'q44':
-					this.setState(state => ({
-						q4: update(state.q4, {3: {$set: state.q4[3]+1}})
-					}))
-					break;
+				case 'q41': this.incrementResults('q4', 0); break;
+				case 'q42': this.incrementResults('q4', 1); break;
+				case 'q43': this.incrementResults('q4', 2); break;
+				case 'q44': this.incrementResults('q4', 3); break;
 				default: console.log('error')
 			}
 
 			switch(el.q5) {
-				case 'q51':
-					this.setState(state => ({
-						q5: update(state.q5, {0: {$set: state.q5[0]+1}})
-					}))
-					break;
-				case 'q52':
-					this.setState(state => ({
-						q5: update(state.q5, {1: {$set: state.q5[1]+1}})
-					}))
-					break;
-				case 'q53':
-					this.setState(state => ({
-						q5: update(state.q5, {2: {$set: state.q5[2]+1}})
-					}))
-					break;
-				case 'q54':
-					this.setState(state => ({
-						q5: update(state.q5, {3: {$set: state.q5[3]+1}})
-					}))
-					break;
-					default: console.log('error')
+				case 'q51': this.incrementResults('q5', 0); break;
+				case 'q52': this.incrementResults('q5', 1); break;
+				case 'q53': this.incrementResults('q5', 2); break;
+				case 'q54': this.incrementResults('q5', 3); break;
+				default: console.log('error')
 			}
 
 			switch(el.q6) {
-				case 'q61':
-					this.setState(state => ({
-						q6: update(state.q6, {0: {$set: state.q6[0]+1}})
-					}))
-					break;
-				case 'q62':
-					this.setState(state => ({
-						q6: update(state.q6, {1: {$set: state.q6[1]+1}})
-					}))
-					break;
-				case 'q63':
-					this.setState(state => ({
-						q6: update(state.q6, {2: {$set: state.q6[2]+1}})
-					}))
-					break;
-				case 'q64':
-					this.setState(state => ({
-						q6: update(state.q6, {3: {$set: state.q6[3]+1}})
-					}))
-					break;
-					default: console.log('error')
+				case 'q61': this.incrementResults('q6', 0); break;
+				case 'q62': this.incrementResults('q6', 1); break;
+				case 'q63': this.incrementResults('q6', 2); break;
+				case 'q64': this.incrementResults('q6', 3); break;
+				default: console.log('error')
 			}
 		})
 	}
@@ -544,17 +253,17 @@ export default class Results extends Component {
 			)
 		} else {
 			return (
-				<div>
-					<p>A total of <strong>{this.state.results.length}</strong> people participated in this survey</p>
-					<h3>Part 1 - demopgraphics</h3>
-					<div>
+				<div className={styles.container}>
+					<p className={styles.nOfParticipants}>A total of <strong>{this.state.results.length}</strong> people participated in this survey</p>
+					<h3 className={styles.parts}>Part 1 - demopgraphics</h3>
+					<div className={styles.survey1charts}>
 						<Chart
 							chartType="PieChart"
 							data={[["", ""], ["0-17", this.state.age[0]], ["18-24", this.state.age[1]], ["25-34", this.state.age[2]], ["35-50", this.state.age[3]], ["50-66", this.state.age[4]], ["67+", this.state.age[5]], ["Prefer not to answer", this.state.age[6]]]}
 							options={pieOptions}
 							graph_id="PieChart1"
-							width={"200px"}
-							height={"200px"}
+							width={"auto"}
+							height={"300px"}
 							legend_toggle
 						/>
 						<Chart
@@ -562,8 +271,8 @@ export default class Results extends Component {
 							data={[["", ""], ["Cis Male", this.state.gender[0]], ["Cis Female", this.state.gender[1]], ["Trans male", this.state.gender[2]], ["Trans female", this.state.gender[3]], ["Genderqueer / Genderfluid / Non-binary", this.state.gender[4]], ["Other", this.state.gender[5]], ["Prefer not to answer", this.state.gender[6]]]}
 							options={pieOptions}
 							graph_id="PieChart2"
-							width={"200px"}
-							height={"200px"}
+							width={"auto"}
+							height={"300px"}
 							legend_toggle
 						/>
 						<Chart
@@ -571,8 +280,8 @@ export default class Results extends Component {
 							data={[["", ""], ["Caucasian", this.state.gender[0]], ["Negroid", this.state.gender[1]], ["Mongoloid", this.state.gender[2]], ["Asian", this.state.gender[3]], ["Filipino", this.state.gender[4]], ["Native American", this.state.gender[5]], ["Latinx", this.state.gender[6]], ["Other", this.state.gender[7]], ["Prefer not to answer", this.state.gender[8]]]}
 							options={pieOptions}
 							graph_id="PieChart3"
-							width={"200px"}
-							height={"200px"}
+							width={"auto"}
+							height={"300px"}
 							legend_toggle
 						/>
 						<Chart
@@ -580,8 +289,8 @@ export default class Results extends Component {
 							data={[["", ""], ["No education", this.state.education[0]], ["Primary Education", this.state.education[1]], ["Secondary Education", this.state.education[2]], ["Bachelor's degree", this.state.education[3]], ["Master's degree", this.state.education[4]], ["Doctorate", this.state.education[5]], ["Other", this.state.education[6]], ["Prefer not to answer", this.state.education[7]]]}
 							options={pieOptions}
 							graph_id="PieChart4"
-							width={"200px"}
-							height={"200px"}
+							width={"auto"}
+							height={"300px"}
 							legend_toggle
 						/>
 						<Chart
@@ -589,67 +298,73 @@ export default class Results extends Component {
 							data={[["", ""], ["Full-time(40+ hours a week)", this.state.employment[0]], ["Part-time(less than 40 hours a week)", this.state.employment[1]], ["Unemployed (looking for job)", this.state.employment[2]], ["Unemployed (not looking for a job)", this.state.employment[3]], ["Student", this.state.employment[4]], ["Retired", this.state.employment[5]], ["Self-employed", this.state.employment[6]], ["Unable to work", this.state.employment[7]], ["Other", this.state.employment[7]], ["Prefer not to answer", this.state.employment[7]]]}
 							options={pieOptions}
 							graph_id="PieChart5"
-							width={"200px"}
-							height={"200px"}
+							width={"auto"}
+							height={"300px"}
 							legend_toggle
 						/>
 					</div>
 					
-					<Chart
-						width={'800px'}
-						height={'300px'}
-						chartType="BarChart"
-						loader={<div>Loading Chart</div>}
-						data={[
-							['', 'Option 1', 'Option 2'],
-							['Chocolate Pudding \n Vanilla Pudding', this.state.pudding[0], this.state.pudding[1]],
-							['Dark Chocolate \n Milk Chocolate', this.state.chocolate[0], this.state.chocolate[1]],
-							['Rice \n Potatoes', this.state.staple[0], this.state.staple[1]],
-							['Northen Hemisphere \n Southen Hemisphere', this.state.hemisphere[0], this.state.hemisphere[1]],
-							['Reacr \n Angular', this.state.framework[0], this.state.framework[1]],
-							['American English \n British English', this.state.english[0], this.state.english[1]],
-						]}
-						options={{
-							title: 'Would you rather?',
-							chartArea: { width: '50%', height: '90%' },
-							series: {
-								0: { axis: 'option1', visibleInLegend: false },
-								1: { axis: 'option2', visibleInLegend: false }
-							},
-							axes: {
-								x: {
-									distance: {height: '30'}
+					<div>
+						<h3 className={styles.parts}>Part 3 - Would you rather?</h3>
+						<Chart
+							width={'auto'}
+							height={'300px'}
+							chartType="BarChart"
+							loader={<div>Loading Chart</div>}
+							data={[
+								['', 'Option 1', 'Option 2'],
+								['Chocolate Pudding \n Vanilla Pudding', this.state.pudding[0], this.state.pudding[1]],
+								['Dark Chocolate \n Milk Chocolate', this.state.chocolate[0], this.state.chocolate[1]],
+								['Rice \n Potatoes', this.state.staple[0], this.state.staple[1]],
+								['Northen Hemisphere \n Southen Hemisphere', this.state.hemisphere[0], this.state.hemisphere[1]],
+								['React \n Angular', this.state.framework[0], this.state.framework[1]],
+								['American English \n British English', this.state.english[0], this.state.english[1]],
+							]}
+							options={{
+								title: 'Would you rather?',
+								chartArea: { width: '50%', height: '90%' },
+								series: {
+									0: { axis: 'option1', visibleInLegend: false },
+									1: { axis: 'option2', visibleInLegend: false }
+								},
+								axes: {
+									x: {
+										distance: {height: '30'}
+									}
 								}
-							}
-						}}
-						// For tests
-						rootProps={{ 'data-testid': '1' }}
-					/>
+							}}
+							// For tests
+							rootProps={{ 'data-testid': '1' }}
+						/>
+					</div>
 	
 					<div>
+						<h3 className={styles.parts}>Part 3 - What would you do with $1000?</h3>
 						<div>
-							<h2>Shortest answer:</h2>
-							<p>{this.state.shortest}</p>
+							<h4 className={styles.subparts}>Shortest answer:</h4>
+							<p className={styles.text}>{this.state.shortest}</p>
 						</div>
 						<div>
-							<h2>Longest answer:</h2>
-							<p>{this.state.longest}</p>
+							<h4 className={styles.subparts}>Longest answer:</h4>
+							<p className={styles.text}>{this.state.longest}</p>
 						</div>
 					</div>
 					
 					<div>
+						<h3 className={styles.parts}>Part 4 - Don't Stop Me Now Trivia</h3>
+						<p className={styles.annotation}>If the options don't add up to 100% that's because all numbers are rounded down</p>
 						<ol>
-							<li>
-								What's Freddy floating around?<br />
+							<li className={styles.answers}>
+								<span className={styles.question}>What's Freddy floating around?</span><br />
 								<br />
-								Dopamine {Math.floor(this.state.q1[0]/this.state.q1.reduce((acc, val) => acc + val) * 100)}%<br />
-								<strong>Ecstasy {Math.floor(this.state.q1[1]/this.state.q1.reduce((acc, val) => acc + val) * 100)}%</strong><br />
-								Excitement {Math.floor(this.state.q1[2]/this.state.q1.reduce((acc, val) => acc + val) * 100)}%<br />
-								Elecricity {Math.floor(this.state.q1[3]/this.state.q1.reduce((acc, val) => acc + val) * 100)}%<br />
+								dopamine {Math.floor(this.state.q1[0]/this.state.q1.reduce((acc, val) => acc + val) * 100)}%<br />
+								<strong>ecstasy {Math.floor(this.state.q1[1]/this.state.q1.reduce((acc, val) => acc + val) * 100)}%</strong><br />
+								excitement {Math.floor(this.state.q1[2]/this.state.q1.reduce((acc, val) => acc + val) * 100)}%<br />
+								elecricity {Math.floor(this.state.q1[3]/this.state.q1.reduce((acc, val) => acc + val) * 100)}%<br />
 							</li>
 							<br />
-							<li>
-								He's a tiger doing what?<br />
+							<li className={styles.answers}>
+								<span className={styles.question}>He's a tiger doing what?</span><br />
 								<br />
 								<strong>defying the laws of gravity {Math.floor(this.state.q2[0]/this.state.q2.reduce((acc, val) => acc + val) * 100)}%</strong><br />
 								denying all of his cavities {Math.floor(this.state.q2[1]/this.state.q2.reduce((acc, val) => acc + val) * 100)}%<br />
@@ -657,8 +372,8 @@ export default class Results extends Component {
 								subdueing his creativity {Math.floor(this.state.q2[3]/this.state.q2.reduce((acc, val) => acc + val) * 100)}%<br />
 							</li>
 							<br />
-							<li>
-								He's a racing car passing by like who?<br />
+							<li className={styles.answers}>
+								<span className={styles.question}>He's a racing car passing by like who?</span><br />
 								<br />
 								Alexander the Great {Math.floor(this.state.q3[0]/this.state.q3.reduce((acc, val) => acc + val) * 100)}%<br />
 								<strong>Lady Godiva {Math.floor(this.state.q3[1]/this.state.q3.reduce((acc, val) => acc + val) * 100)}%</strong><br />
@@ -666,8 +381,8 @@ export default class Results extends Component {
 								The Pope {Math.floor(this.state.q3[3]/this.state.q3.reduce((acc, val) => acc + val) * 100)}%<br />
 							</li>
 							<br />
-							<li>
-								He's a rocketship on his way where?<br />
+							<li className={styles.answers}>
+								<span className={styles.question}>He's a rocketship on his way where?</span><br />
 								<br />
 								<strong>to Mars {Math.floor(this.state.q4[0]/this.state.q4.reduce((acc, val) => acc + val) * 100)}%</strong><br />
 								to Pluto {Math.floor(this.state.q4[1]/this.state.q4.reduce((acc, val) => acc + val) * 100)}%<br />
@@ -675,8 +390,8 @@ export default class Results extends Component {
 								to Venus {Math.floor(this.state.q4[3]/this.state.q4.reduce((acc, val) => acc + val) * 100)}%<br />
 							</li>
 							<br />
-							<li>
-								He's about to explode as what kind of a bomb?<br />
+							<li className={styles.answers}>
+								<span className={styles.question}>He's about to explode as what kind of a bomb?</span><br />
 								<br />
 								hydrogen bomb {Math.floor(this.state.q5[0]/this.state.q5.reduce((acc, val) => acc + val) * 100)}%<br />
 								nuclear bomb {Math.floor(this.state.q5[1]/this.state.q5.reduce((acc, val) => acc + val) * 100)}%<br />
@@ -684,8 +399,8 @@ export default class Results extends Component {
 								neutron bomb {Math.floor(this.state.q5[3]/this.state.q5.reduce((acc, val) => acc + val) * 100)}%<br />
 							</li>
 							<br />
-							<li>
-								He's travelling at what speed?<br />
+							<li className={styles.answers}>
+								<span className={styles.question}>He's travelling at what speed?</span><br />
 								<br />
 								the speed of a car {Math.floor(this.state.q6[0]/this.state.q6.reduce((acc, val) => acc + val) * 100)}%<br />
 								<strong>the speed of light {Math.floor(this.state.q6[1]/this.state.q6.reduce((acc, val) => acc + val) * 100)}%</strong><br />

@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Merriweather+Sans|Overpass&display=swap');
 
+h1 {
+	margin: 0;
+	padding: 1rem;
+}
+
 .container {
 	width: 80%;
 	margin: 0 auto;
@@ -84,11 +89,16 @@ input:checked + .customInput:after {
 
 .form2 {
 	display: grid;
-	grid-template: 2.5rem 2.5rem 2.5rem 2.5rem 2.5rem 2.5rem / auto 2rem 2rem auto auto;
+	grid-template: auto auto auto auto auto auto / 45% 55% 0;
 }
 
 .form2 input {
 	margin: auto;
+}
+
+.form2 label {
+	margin-bottom: 0.3rem;
+	margin-top: 0.3rem;
 }
 
 .onLeft {
@@ -96,5 +106,48 @@ input:checked + .customInput:after {
 }
 
 .customInput2 {
-	position: static;
+	position: relative;
+	left: 0.15rem;
+	top: 0.4rem;
+	display: inline-block;
+	margin: auto 0;
+}
+
+.text {
+	padding: 0 0.8rem;
+}
+
+.button2 {
+	grid-column: span 2;
+	margin-left: 21.8rem;
+}
+
+
+/**********************************************************************/
+
+.textArea {
+	padding: 1rem;
+	margin: 1rem;
+	border: 1px solid #888;
+	border-radius: 0.4rem;
+	font-family: 'Overpass', sans-serif;
+	font-size: 1.2rem;
+}
+
+.input {
+	position: relative;
+	opacity: 1;
+	width: auto;
+	height: auto;
+	margin: 0 auto;
+}
+
+.container3 {
+	text-align: center;
+}
+
+.form3 {
+	text-align: center;
+	display: block;
+	width: 100%
 }

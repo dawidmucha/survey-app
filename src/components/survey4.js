@@ -43,19 +43,22 @@ class Survey4 extends React.Component {
 		const input = (question, answer, text) => {	 
 			return (
 				<div>
-					<input type='radio' name={`q${question}`} id={`q${question}${answer}`} value={`q${question}${answer}`} onChange={this.onChange} />
-					<label htmlFor={`q${question}`} id={`q${question}${answer}`}>{text}</label> <br />
+					<label htmlFor={`q${question}${answer}`} className={styles.element}>
+						<input type='radio' name={`q${question}`} id={`q${question}${answer}`} value={`q${question}${answer}`} onChange={this.onChange} />
+						<span className={styles.customInput} />
+						<span>{text}</span> <br />
+					</label> <br />
 				</div>	
 			)
 		}
 
 		return (
-			<div>
+			<div className={styles.container}>
 				<h1>Queen - Don't Stop Me Now trivia</h1>
 				<p>I hope you're having a ball with this survey</p>
 
-				<form onSubmit={this.onSubmit}>
-					<div>
+				<form onSubmit={this.onSubmit} className={styles.form}>
+					<div className={styles.category}>
 						<p>1. What's Freddy floating around?</p>
 							
 						{input('1', '1', 'Dopamine')}
@@ -63,7 +66,7 @@ class Survey4 extends React.Component {
 						{input('1', '3', 'Excitement')}
 						{input('1', '4', 'Elecricity')}
 					</div>
-					<div>
+					<div className={styles.category}>
 						<p>2. He's a tiger doing what?</p>
 						
 						{input('2', '1', 'defying the laws of gravity')}
@@ -71,7 +74,7 @@ class Survey4 extends React.Component {
 						{input('2', '3', 'drinking the juice of anitgravity')}
 						{input('2', '4', 'subdueing his creativity')}
 					</div>
-					<div>
+					<div className={styles.category}>
 						<p>3. He's a racing car passing by like who?</p>
 							
 						{input('3', '1', 'Alexander the Great')}
@@ -79,7 +82,7 @@ class Survey4 extends React.Component {
 						{input('3', '3', 'Ayrton Senna')}
 						{input('3', '4', 'The Pope')}
 					</div>
-					<div>
+					<div className={styles.category}>
 						<p>4. He's a rocketship on his way where?</p>
 							
 						{input('4', '1', 'to Mars')}
@@ -87,24 +90,24 @@ class Survey4 extends React.Component {
 						{input('4', '3', 'to Uranus')}
 						{input('4', '4', 'to Venus')}
 					</div>
-					<div>
+					<div className={styles.category}>
 						<p>5. He's about to explode as what kind of a bomb?</p>
 							
-						{input('4', '1', 'hydrogen bomb')}
-						{input('4', '2', 'nuclear bomb')}
-						{input('4', '3', 'atomic bomb')}
-						{input('4', '4', 'neutron bomb')}
+						{input('5', '1', 'hydrogen bomb')}
+						{input('5', '2', 'nuclear bomb')}
+						{input('5', '3', 'atomic bomb')}
+						{input('5', '4', 'neutron bomb')}
 					</div>
-					<div>
+					<div className={styles.category}>
 						<p>6. He's travelling at what speed?</p>
 							
-						{input('4', '1', 'the speed of a car')}
-						{input('4', '2', 'the speed of light')}
-						{input('4', '3', 'the speed of sound')}
-						{input('4', '4', 'the speed of sight')}
+						{input('6', '1', 'the speed of a car')}
+						{input('6', '2', 'the speed of light')}
+						{input('6', '3', 'the speed of sound')}
+						{input('6', '4', 'the speed of sight')}
 					</div>
 					
-					<button type='submit'>SUBMIT</button>
+					<button type='submit' className={styles.button}>SUBMIT</button>
 				</form>
 			</div>
 		)

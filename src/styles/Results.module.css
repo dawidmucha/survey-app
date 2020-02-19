@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css?family=Merriweather+Sans|Overpass&display=swap');
+
+.container {
+	width: 80%;
+	margin: 0 auto;
+}
+
+.nOfParticipants {
+	font-family: 'Overpass', sans-serif;
+	font-size: 1.2rem;
+	margin: 2rem;
+	text-align: center;
+}
+
+.parts {
+	font-family: 'Overpass', sans-serif;
+	font-size: 2.4rem;
+}
+
+.survey1charts {
+	display: flex;
+	flex-direction: column;
+}
+
+.survey1charts > * {
+	margin: 1rem 0;
+}
+
+.subparts {
+	font-family: 'Overpass', sans-serif;
+	font-size: 2rem;
+	text-align: center;
+}
+
+.text {
+	font-family: 'Overpass', sans-serif;
+	font-size: 1.2rem;
+	width: 80%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.annotation {
+	font-family: 'Overpass', sans-serif;
+	font-size: 0.6rem;
+}
+
+.answers {
+	font-family: 'Overpass', sans-serif;
+	font-size: 1.3rem;
+}
+
+.answers .question {
+	font-family: 'Overpass', sans-serif;
+	font-size: 1.8rem;
+}
