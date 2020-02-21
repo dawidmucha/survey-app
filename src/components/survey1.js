@@ -88,7 +88,7 @@ class Survey1 extends React.Component {
 						{input('education', 'eduPrimary', 'Primary Education')}
 						{input('education', 'eduSecondary', 'Secondary Education')}
 						{input('education', 'eduBachelors', 'Bachelor\'s degree')}
-						{input('education', 'eduMasters', 'Bachelor\'s degree')}
+						{input('education', 'eduMasters', 'Master\'s degree')}
 						{input('education', 'eduDoctorate', 'Doctorate')}
 						{input('education', 'eduOther', 'Other')}
 						{input('education', 'eduUnspecified', 'Prefer not to answer')}
