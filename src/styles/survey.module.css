@@ -1,15 +1,27 @@
 @import url('https://fonts.googleapis.com/css?family=Merriweather+Sans|Overpass&display=swap');
 
+@keyframes :global(slideInFromLeft) {
+  0% {
+		transform: translateY(10%);
+		opacity: 0.9;
+  }
+  100% {
+		transform: translateY(0);
+		opacity: 1;
+  }
+}
+
 h1 {
 	margin: 0;
 	padding: 1rem;
 }
 
-.container {
+.container :global {
 	width: 80%;
 	margin: 0 auto;
 	font-family: 'Overpass', sans-serif;
 	font-size: 1.2rem;
+	animation: 0.5s ease 0s 1 slideInFromLeft;
 }
 
 .form {

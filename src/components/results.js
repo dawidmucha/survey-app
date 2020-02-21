@@ -3,6 +3,7 @@ import axios from 'axios'
 import update, { extend } from 'immutability-helper';
 import Chart from "react-google-charts";
 import styles from '../styles/Results.module.css'
+import { withRouter } from 'react-router-dom'
 
 const pieOptions = {
   title: "wowsee",
@@ -41,7 +42,7 @@ const pieOptions = {
   fontName: "Roboto"
 };
 
-export default class Results extends Component {
+class Results extends Component {
 	constructor(props) {
 		super(props)
 
@@ -77,6 +78,7 @@ export default class Results extends Component {
 
 		this.preparingResults = this.preparingResults.bind(this)
 		this.incrementResults = this.incrementResults.bind(this)
+		this.onBtnBack = this.onBtnBack.bind(this)
 	}
 	
 	componentDidMount() {
@@ -89,6 +91,10 @@ export default class Results extends Component {
 			this.preparingResults()
 			console.log(this.state)
 		}).catch((err => console.log(err)))
+	}
+
+	onBtnBack() {
+		this.props.history.push('/')
 	}
 
 	incrementResults(field, position) {
@@ -305,7 +311,7 @@ export default class Results extends Component {
 					</div>
 					
 					<div>
-						<h3 className={styles.parts}>Part 3 - Would you rather?</h3>
+						<h3 className={styles.parts}>Part 2 - Would you rather?</h3>
 						<Chart
 							width={'auto'}
 							height={'300px'}
@@ -408,9 +414,14 @@ export default class Results extends Component {
 								the speed of sight {Math.floor(this.state.q6[3]/this.state.q6.reduce((acc, val) => acc + val) * 100)}%<br />
 							</li>
 						</ol>
+						<div>
+							<button className={styles.button} onClick={this.onBtnBack}>GO BACK</button>
+						</div>
 					</div>
 				</div>
 			)
 		}
   }
 }
+
+export default withRouter(Results)
