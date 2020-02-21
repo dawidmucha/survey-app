@@ -26,7 +26,7 @@ app.use(function(req, res, next) {
   }
 });
 
-const uri = process.env.ATLAS_URI
+const uri = process.env.ATLAS_URI || "mongodb://user:zaq1@WSX@ds131711.mlab.com:31711/heroku_34w9747x"
 
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true })
 
