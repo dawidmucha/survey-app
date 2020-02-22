@@ -84,7 +84,7 @@ class Results extends Component {
 	componentDidMount() {
 		this.props.updatePath()
 		this.setState({fetched: false})
-		axios.get('http://localhost:5000/results').then(response => {	
+		axios.get('https://localhost:5000/results').then(response => {	
 			console.log('response', response.data)
 			this.setState({results: [...Object.values(response.data)]})
 			this.setState({fetched: true})
