@@ -35,7 +35,7 @@ router.route('/survey4').post((req, res) => {
 })
 
 
-router.route('/results').get((req, res) => {
+router.route('/resultsjson').get((req, res) => {
 	Survey.find().then(results => {
 		return res.json(results)
 	}).catch(err => res.status(400).json('Error: ', err))

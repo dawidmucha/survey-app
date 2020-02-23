@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import update, { extend } from 'immutability-helper';
+import update from 'immutability-helper';
 import Chart from "react-google-charts";
 import styles from '../styles/Results.module.css'
 import { withRouter } from 'react-router-dom'
@@ -84,7 +84,7 @@ class Results extends Component {
 	componentDidMount() {
 		this.props.updatePath()
 		this.setState({fetched: false})
-		axios.get('http://localhost:5000/results').then(response => {	
+		axios.get('http://localhost:5000/resultsjson').then(response => {	
 			console.log('response', response.data)
 			this.setState({results: [...Object.values(response.data)]})
 			this.setState({fetched: true})
